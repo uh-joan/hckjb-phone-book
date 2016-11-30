@@ -9,27 +9,31 @@
  */
 angular.module('phonyApp')
   .controller('MainCtrl', ['contacts', '$mdSidenav', '$mdBottomSheet',
-    function (contacts, $mdSideNav, $mdBottomSheet ) {
+    function (contacts, $mdSidenav, $mdBottomSheet ) {
       var vm = this;
 
-
-
+      // Get all contacts from Service
       contacts.getAll().then(function(response){
-        console.log(JSON.stringify(response));
         vm.contacts = response.contacts;
         vm.selected = vm.contacts[0];
-        vm.selected.avatar = 'svg-1'
+        vm.selected.avatar = 'svg-1';
       }, function(e){
         console.log(e);
       });
 
+      // Select contact
       vm.selectContact = function ( contact , index) {
         vm.selected =  contact;
         vm.selected.avatar = 'svg-'+(index+1);
       };
 
+      // Toggle Sidebar
+      vm.toggleList = function(){
+        $mdSidenav('left').toggle();
+      };
+
+      // Share Contact
       vm.share = function (selectedContact){
-        var appRoot = 'https://rawgit.com/angular/material-start/es5-tutorial/app/';
 
         $mdBottomSheet.show({
           controllerAs     : "vm",
@@ -38,18 +42,13 @@ angular.module('phonyApp')
           parent           : angular.element(document.getElementById('content'))
         });
 
-        /**
-         * Bottom Sheet controller for the Avatar Actions
-         */
         function ContactSheetController( $mdBottomSheet ) {
-          var rootURL = appRoot + "assets/svg/";
-
           this.user = selectedContact;
           this.items = [
-            { name: 'Phone'       , icon: 'phone'       , icon_url: rootURL + 'phone.svg'},
-            { name: 'Twitter'     , icon: 'twitter'     , icon_url: rootURL + 'twitter.svg'},
-            { name: 'Google+'     , icon: 'google_plus' , icon_url: rootURL + 'google_plus.svg'},
-            { name: 'Hangout'     , icon: 'hangouts'    , icon_url: rootURL + 'hangouts.svg'}
+            { name: 'Phone'       , icon: 'phone'       , icon_url: 'assets/phone.svg'},
+            { name: 'Twitter'     , icon: 'twitter'     , icon_url: 'assets/twitter.svg'},
+            { name: 'Whatsapp'    , icon: 'whatsapp'    , icon_url: 'assets/whatsapp.svg'},
+            { name: 'Snapchat'    , icon: 'snapchat'    , icon_url: 'assets/snapchat.svg'}
           ];
           this.doContact = function(action) {
             // The actually contact process has not been implemented...
@@ -57,7 +56,6 @@ angular.module('phonyApp')
             $mdBottomSheet.hide(action);
           };
         }
-
       };
 
 

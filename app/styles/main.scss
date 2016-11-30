@@ -3,15 +3,19 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
+$brown-theme: #795548;
+
 html, body {
   font-family: 'Roboto', sans-serif;
   font-size:14px;
   height:100%;
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
 }
 
-/** Enabled Step 3... */
+md-toolbar {
+  height:70px;
+}
 
 md-toolbar h3 {
   margin: auto;
@@ -27,6 +31,7 @@ md-list-item > button {
   padding-left: 40px;
   padding-right: 40px;
   padding-top: 5px;
+//  text-align: center;
 }
 
 .avatar {
@@ -45,6 +50,12 @@ md-list-item > button {
   -moz-transform:scale(0.70);
 }
 
+.avatar-big {
+  @extend .avatar;
+  width: 256px;
+  height: 256px;
+}
+
 md-icon svg {
   border-radius: 50%;
 }
@@ -60,7 +71,15 @@ md-icon svg {
   right: 25px;
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
+.item-list-selected {
+  background-color: $brown-theme;
+  color: white;
+}
 
+md-list {
+  padding: 0;
+}
+
+.details {
+  padding: 10px 0;
 }

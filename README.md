@@ -1,12 +1,6 @@
 # phony
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.15.1.
-
 ## Build & development
 
-Run `grunt` for building and `grunt serve` for preview.
-
-## Testing
-
-Running `grunt test` will run the unit tests with karma.
+1. Run `grunt` for building.
+2. Run `grunt serve` for preview.

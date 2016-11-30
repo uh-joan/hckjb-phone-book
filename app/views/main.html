@@ -1,12 +1,16 @@
-<md-toolbar>
+<md-toolbar layout="row">
+  <md-button class="menu" hide-gt-sm ng-click="vm.toggleList();" hide-gt-sm>
+    <md-icon md-svg-icon="menu" aria-label="Show contact list"></md-icon>
+  </md-button>
   <h3>My Phone Book</h3>
 </md-toolbar>
 
 <div id="container" layout="row" flex>
-  <md-sidenav md-is-locked-open="true" class="md-whiteframe-4dp">
-    <md-list>
-      <md-list-item ng-repeat="contact in vm.contacts track by $index">
-        <md-button ng-click="vm.selectContact(contact, $index)">
+  <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" class="md-whiteframe-4dp" md-component-id='left'>
+    <md-list ng-click="vm.toggleList();">
+      <md-list-item ng-repeat="contact in vm.contacts track by $index"
+                    ng-class="{'item-list-selected':vm.selected.name === contact.name}">
+        <md-button ng-click="vm.selectContact(contact, $index);">
           <md-icon md-svg-src="svg-{{$index+1}}" class="avatar"></md-icon>
           {{contact.name}}
         </md-button>
@@ -14,14 +18,35 @@
     </md-list>
   </md-sidenav>
 
-  <md-content id="content" flex>
-    <md-icon md-svg-src="{{vm.selected.avatar}}"
-             class="avatar"></md-icon>
-    <h2>{{vm.selected.name}}</h2>
-    <p>{{vm.selected.phone_number}}</p>
-    <p>{{vm.selected.address}}</p>
+  <md-content class="md-padding" id="content" flex>
 
-    <md-button class="share" md-no-ink aria-label="share" ng-click="vm.share(vm.selected)">
+    <div layout="column">
+      <div flex class="details">
+        <md-icon md-svg-src="{{vm.selected.avatar}}"
+                 class="avatar-big"></md-icon>
+      </div>
+      <div flex class="details">
+        <h2>{{vm.selected.name}}</h2>
+      </div>
+      <div flex>
+        <div layout="row" class="details">
+          <div flex="10">
+            <ng-md-icon class="md-avatar-icon" icon="phone" size="24"></ng-md-icon>
+          </div>
+          <div flex="90">{{vm.selected.phone_number}}</div>
+        </div>
+      </div>
+      <div flex>
+        <div layout="row" class="details">
+          <div flex="10">
+            <ng-md-icon class="md-avatar-icon" icon="home" size="24"></ng-md-icon>
+          </div>
+          <div flex="90">{{vm.selected.address}}</div>
+        </div>
+      </div>
+    </div>
+
+    <md-button class="share" md-no-ink aria-label="Share with {{vm.selected.name}}" ng-click="vm.share(vm.selected)">
       <md-icon md-svg-icon="share"></md-icon>
     </md-button>
 
