@@ -1,4 +1,4 @@
-# phony
+# Hackajob phone book
 
 ## Build & development
 
