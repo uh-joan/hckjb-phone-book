@@ -1,4 +1,4 @@
-# Hackajob phone book
+# Phone book
 
 ## Build & development
 
