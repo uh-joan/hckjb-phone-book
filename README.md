@@ -8,4 +8,4 @@
 4. Run `grunt` for building.
 5. Run `grunt serve` for preview.
 
-Live [demo](http://www.apicake.io/phonebook)
+Live [demo](http://anitin.net/phonebook)
